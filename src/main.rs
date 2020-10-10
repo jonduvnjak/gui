@@ -1,6 +1,8 @@
 #![deny(warnings)]
 #![warn(clippy::all)]
 
+use std::panic;
+
 use egui::*;
 use egui_glium::storage::FileStorage;
 
@@ -42,10 +44,18 @@ impl egui::app::App for MyApp {
         match digits {
             Some(digits) => {
                 ui.label(format!("My digits {:?}", digits));
-                ui.label(format!(
-                    "The largest product of the window is {}",
-                    calculate_largest_window(*window_size, digits)
-                ));
+                let result = panic::catch_unwind(|| calculate_largest_window(*window_size, digits));
+                match result {
+                    Ok(number) => {
+                        ui.label(format!("The largest product of the window is {}", number))
+                    }
+                    Err(_) => ui.label(
+                        Label::new(
+                            "Error, the largest product is too large. Try reducing the window size.",
+                        )
+                        .text_color(color::RED),
+                    ),
+                };
             }
             None => {
                 ui.label(Label::new("Please input numbers only").text_color(color::RED));
