@@ -1,12 +1,9 @@
-//! Example of how to use Egui
-
-//#![deny(warnings)]
+#![deny(warnings)]
 #![warn(clippy::all)]
 
 use egui::*;
 use egui_glium::storage::FileStorage;
 
-/// We derive Deserialize/Serialize so we can persist app state on shutdown.
 #[derive(serde::Deserialize, serde::Serialize)]
 struct MyApp {
     string_digits: String,
@@ -31,7 +28,6 @@ impl egui::app::App for MyApp {
             window_size,
         } = self;
 
-        // Example used in `README.md`.
         ui.horizontal(|ui| {
             ui.label("Enter a bunch of numbers");
             ui.text_edit(string_digits);
