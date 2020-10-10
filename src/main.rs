@@ -34,7 +34,7 @@ impl egui::app::App for MyApp {
         });
         ui.horizontal(|ui| {
             ui.label("Enter a window size");
-            ui.add(Slider::usize(window_size, 1..=200000).text(""));
+            ui.add(Slider::usize(window_size, 1..=30).text(""));
             *window_size = (*window_size).max(1);
         });
 
