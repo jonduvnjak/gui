@@ -59,7 +59,7 @@ impl egui::app::App for MyApp {
 }
 
 fn main() {
-    let title = "My Egui Window";
+    let title = "Jon's Euler8 project";
     let storage = FileStorage::from_path(".egui_example_glium.json".into()); // Where to persist app state
     let app: MyApp = egui::app::get_value(&storage, egui::app::APP_KEY).unwrap_or_default(); // Restore `MyApp` from file, or create new `MyApp`.
     egui_glium::run(title, storage, app);
